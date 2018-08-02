@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CharComponent = (props) => {
-    const styles = {
+    const validStyles = {
         display: 'inline-block', 
         padding: '16px', 
         textAlign: 'center', 
@@ -9,8 +9,16 @@ const CharComponent = (props) => {
         border: '1px solid black'
     }
 
+    const warningStyles = {
+        display: 'inline-block', 
+        padding: '16px', 
+        textAlign: 'center', 
+        margin: '16px', 
+        border: '1px solid red'
+    }
+
     return (
-        <div style={styles} 
+        <div style={ (props.length < 5) ? warningStyles : validStyles } 
             onClick={props.click} > 
             {props.letter}
         </div>

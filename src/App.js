@@ -6,49 +6,43 @@ import CharComponent from './CharComponent';
 class App extends Component {
   state = {
     inputLength: 0,
-    inputText: '',
-    blockArray: []
+    inputText: ''
   }
 
   inputChangeHandler = (event) => {
+    this.setState({ inputText: event.target.value });
+    // console.log('first input', this.state.inputText )
     const newInputLength = event.target.value.length;
     this.setState({ inputLength: newInputLength });
-    this.setState({ inputText: event.target.value });
-    this.setState({ blockArray: this.state.inputText.split('')});
   }
 
   deleteBlockHandler = (index) => {
-    let newInputArry = [...this.state.blockArray];
-    newInputArry.splice(index, 1);
-    this.setState({ blockArray: newInputArry});
-    this.setState({ inputText: newInputArry.join('')});
+    console.log(index)
+    let currentInputArry = this.state.inputText.split('');
+    currentInputArry.splice(index, 1);
+    let updatedInputArry = currentInputArry.join('');
+    this.setState({ inputText: updatedInputArry });
     // console.log(this.state.blockArray)
   }
 
   render() {
     const { inputLength, inputText, blockArray } = this.state;
 
-    let charBlocks = null;
-
-    if (inputLength) {
-      charBlocks = (
-        <div>
-          {blockArray.map( (letter, index) => {
+    let charBlocks = inputText.split('').map( (letter, index) => {
             return <CharComponent 
                     letter={letter} 
-                    click={(index) => this.deleteBlockHandler(index)} 
+                    click={() => this.deleteBlockHandler(index)} 
                     key={index}
+                    length={inputLength}
                     />
-          })}
-        </div>
-      );
-    }
+    });
 
     return (
       <div className="App">
-        <input onChange={this.inputChangeHandler} value={inputText} />
+        <input type='text' onChange={this.inputChangeHandler} value={inputText} />
         <p> Text Length : {inputLength} </p>
-        { console.log(this.state.inputText) }
+        { blockArray }
+        { inputText }
         <ValidationComponent textLength={inputLength} />
         {/* <CharComponent /> */}
         {charBlocks}
