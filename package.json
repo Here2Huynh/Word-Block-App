@@ -7,7 +7,7 @@
     "react-dom": "^16.0.0-rc.3",
     "react-scripts": "^1.1.4"
   },
-  "homepage": "https://github.com/Here2Huynh/Word-Block-App",
+  "homepage": "https://here2huynh.github.io/Word-Block-App/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
